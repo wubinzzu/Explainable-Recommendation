@@ -1,4 +1,4 @@
-# Usage: put this file together with all json files, then run in console with the argument of output dir.
+# Usage: Run in console with arguments of data dir and output dir.
 
 import sys
 import os
@@ -23,18 +23,19 @@ def processCategory(file, outputDir):
 
 
 
-if len(sys.argv) < 2:
-    sys.exit('Usage: %s output-dir' % sys.argv[0])
-outputPath = sys.argv[1]
+if len(sys.argv) < 3:
+    sys.exit('Usage: %s data-dir output-dir' % sys.argv[0])
+outputPath = sys.argv[2]
+dataDir = sys.argv[1]
 
 
 
-files = os.listdir(os.getcwd())
+files = os.listdir(dataDir)
 for file in files:
     if os.path.splitext(file)[1] == '.json':
-        outputDir = outputPath + os.path.splitext(file)[0]
+        outputDir = os.path.join(outputPath, os.path.splitext(file)[0])
         isExists = os.path.exists(outputDir)
         if not isExists:
             os.makedirs(outputDir)
-        processCategory(file, outputDir)
+        processCategory(os.path.join(dataDir, file), outputDir)
 

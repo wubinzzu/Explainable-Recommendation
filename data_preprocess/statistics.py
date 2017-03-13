@@ -19,7 +19,7 @@ def get_statistics(file):
             if product_id not in product_dict:
                 product_dict[product_id] = 0
 
-    print "%-20s   %-10d    %-10d    %-10d    %-10f" %(os.path.basename(file), len(user_dict), len(product_dict), reviews_count, (reviews_count/len(user_dict)))
+    print "%-30s   %-10d    %-10d    %-10d    %-10f" %(os.path.basename(file), len(user_dict), len(product_dict), reviews_count, (reviews_count/len(user_dict)))
 
 
 
@@ -28,7 +28,9 @@ if len(sys.argv) < 2:
 data_dir = sys.argv[1]
 
 files = os.listdir(data_dir)
-print "%-20s   %-10s    %-10s    %-10s    %-10s" %("Dataset", "#users", "#items", "#reviews", "#reviews/#users")
+print "%-30s   %-10s    %-10s    %-10s    %-10s" %("Dataset", "#users", "#items", "#reviews", "#reviews/#users")
 for file in files:
     if os.path.splitext(file)[1] == '.json':
         get_statistics(os.path.join(data_dir, file))
+
+6

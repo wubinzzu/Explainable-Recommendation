@@ -1,10 +1,10 @@
-# Usage: Run in console with arguments of data dir and output dir.
+# Usage: python sort_reviews_by_user.py data-dir output-dir
 
 import sys
 import os
 import json
 
-def processCategory(file, outputDir):
+def process_category(file, outputDir):
     dict = {}
     with open(file) as data_file:
         for line in data_file:
@@ -37,5 +37,5 @@ for file in files:
         isExists = os.path.exists(outputDir)
         if not isExists:
             os.makedirs(outputDir)
-        processCategory(os.path.join(dataDir, file), outputDir)
+        process_category(os.path.join(dataDir, file), outputDir)
 

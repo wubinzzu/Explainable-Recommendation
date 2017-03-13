@@ -4,3 +4,4 @@
 .idea
 # Ignore data files
 .json
+.gz

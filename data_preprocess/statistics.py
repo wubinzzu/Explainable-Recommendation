@@ -25,10 +25,10 @@ def get_statistics(file):
 
 if len(sys.argv) < 2:
     sys.exit('Usage: %s data-dir' % sys.argv[0])
-dataDir = sys.argv[1]
+data_dir = sys.argv[1]
 
-files = os.listdir(dataDir)
+files = os.listdir(data_dir)
 print "%-20s   %-10s    %-10s    %-10s    %-10s" %("Dataset", "#users", "#items", "#reviews", "#reviews/#users")
 for file in files:
     if os.path.splitext(file)[1] == '.json':
-        get_statistics(os.path.join(dataDir, file))
+        get_statistics(os.path.join(data_dir, file))

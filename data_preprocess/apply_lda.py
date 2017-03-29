@@ -7,6 +7,7 @@ import gensim
 import sys
 import os
 import json
+import re
 
 stops = set(stopwords.words("english"))
 p_stemmer = PorterStemmer()
@@ -18,6 +19,7 @@ def extract_reviews(file):
             json_data = json.loads(line)
             review_text = json_data["reviewText"]
             review_text = review_text.lower()
+            review_text = re.sub(r"[^A-Za-z0-9\'\s]", "", review_text)
             tokens = word_tokenize(review_text)
             stopped_tokens = [i for i in tokens if not i in stops]
             stemmed_tokens = [p_stemmer.stem(i) for i in stopped_tokens]
@@ -37,5 +39,5 @@ dictionary = corpora.Dictionary(texts)
 corpus = [dictionary.doc2bow(text) for text in texts]
 
 # generate LDA model
-ldamodel = gensim.models.ldamodel.LdaModel(corpus, num_topics=10, id2word=dictionary, passes=20)
+ldamodel = gensim.models.ldamodel.LdaModel(corpus, num_topics=20, id2word=dictionary, passes=50)
 print(ldamodel.print_topics(num_topics=10, num_words=4))

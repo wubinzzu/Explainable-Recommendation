@@ -13,12 +13,16 @@ def process_category(file, output_dir):
             if user_id not in user_dict:
                 user_dict[user_id] = []
             user_dict[user_id].append(json_data)
+        total_Review = 0
         for k, v in user_dict.items():
-            v = sorted(v, key=lambda k: k['unixReviewTime'], reverse=True)
-            filename = os.path.join(output_dir, k + '.json')
-            with open(filename, 'a') as file:
-                for json_record in v:
-                    file.write(json.dumps(json_record) + '\n')
+            if len(v) >= 50:
+                total_Review += len(v)
+                v = sorted(v, key=lambda k: k['unixReviewTime'], reverse=True)
+                filename = os.path.join(output_dir, k + '.json')
+                with open(filename, 'a') as file:
+                    for json_record in v:
+                        file.write(json.dumps(json_record) + '\n')
+        print(total_Review)
 
 
 

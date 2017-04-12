@@ -18,7 +18,18 @@ def get_statistics(file):
                 user_dict[user_id] = 0
             if product_id not in product_dict:
                 product_dict[product_id] = 0
-
+            user_dict[user_id] += 1
+            product_dict[product_id] += 1
+    user_count = 0
+    product_count = 0
+    for value in user_dict.itervalues():
+        if value > 100:
+            user_count += 1
+    for value in product_dict.itervalues():
+        if value > 300:
+            product_count += 1
+    print (user_count)
+    print (product_count)
     print "%-30s   %-10d    %-10d    %-10d    %-10f" %(os.path.basename(file), len(user_dict), len(product_dict), reviews_count, (reviews_count/len(user_dict)))
 
 
